@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-## Run with sudo
+## Run this script with sudo after setup-web2py-nginx-uwsgi-ubuntu.sh
 ##
 ## Set a web2py development environment inside a Vagrant box.
 ##
@@ -12,7 +12,6 @@
 ## by @viniciusban
 
 
-## Run this script after setup-web2py-nginx-uwsgi-ubuntu.sh
 
 if [ ! -f "/etc/uwsgi/web2py.ini" ]; then
     echo "Missing web2py configuration for uwsgi."
