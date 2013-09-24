@@ -10,3 +10,8 @@ You can use your own .gitignore, too. We have a default one, but why worrying ab
 We automate all this configuration process and initialize a git repo for you, with a suggested directory structure.
 
 **Note:** currently, this configuration options are only available in Vagrant version. Virtualenv option are work in progress.
+
+**TODO:**
+
+1. Allow virtualenv script to behave like the vagrant one.
+1. Create bootstrap.sh for Vagrant.
