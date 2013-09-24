@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 ## Run this script with sudo after setup-web2py-nginx-uwsgi-ubuntu.sh
+## inside your Vagrant machine.
 ##
 ## Set a web2py development environment inside a Vagrant box.
 ##
@@ -39,7 +40,7 @@ sudo chown -R vagrant:vagrant /home/www-data/web2py
 
 ## create a symbolic link to run your app
 
-appname=$(echo /etc/hostname)
+appname=$(cat /etc/hostname)
 ln -s /vagrant/src /home/www-data/web2py/applications/$appname
 
 
