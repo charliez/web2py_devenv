@@ -11,7 +11,4 @@ We automate all this configuration process and initialize a git repo for you, wi
 
 **Note:** currently, this configuration options are only available in Vagrant version. Virtualenv option are work in progress.
 
-**TODO:**
-
-1. Allow virtualenv script to behave like the vagrant one.
-1. Create bootstrap.sh for Vagrant.
+**TODO:** See issues page.
