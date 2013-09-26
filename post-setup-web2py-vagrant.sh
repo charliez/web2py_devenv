@@ -7,7 +7,7 @@
 ##
 ## This script does these:
 ## 1. sets "vagrant" as user for nginx and uwsgi
-## 2. sets $HOME and $PATH environment variables for web2py.
+## 2. sets $USER, $HOME and $PATH environment variables for web2py.
 ## 3. let "vagrant" own the filesystem where your application is located.
 ##
 ## by @viniciusban
@@ -54,6 +54,7 @@ stop on runlevel [06]
 respawn
 
 script
+    export USER="vagrant"
     export HOME="/home/vagrant"
     export PATH="/home/vagrant/bin":$PATH
     exec uwsgi --master --die-on-term --emperor /etc/uwsgi --logto /var/log/uwsgi/uwsgi.log
