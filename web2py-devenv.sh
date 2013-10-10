@@ -172,6 +172,7 @@ else
     echo -e "OK\n"
 fi
 cd $basedir
+rm -rf _tmp >/dev/null
 
 echo "Initializing your git repo... "
 git init . >/dev/null 2>&1
@@ -182,7 +183,6 @@ echo -e "OK\n"
 echo -e "Finished!\n"
 
 cd $basedir
-rm -rf _tmp >/dev/null
 
 tree --noreport -d $basedir
 
