@@ -19,11 +19,22 @@ appname=$1
 sourcedir="${HOME}/bin/web2py.dir"
 
 # Name of web2py zipped source code.
-sourcefile=${web2py_trunk_filename}
+sourcefile="web2py_src_v2.7.4.zip"
 
 # Your scaffolding application. By default, Web2py uses welcome.w2p, but you
 # can modify it and use the name you want. But keep it tar gzipped.
 scaffoldingapp="my_welcome.tar.gz"
+
+if [ -z "${VIRTUAL_ENV}" ]; then
+    echo "There isn't an active virtualenv. Please, activate one and call me again."
+    exit 1
+fi
+
+if [ "${PWD}" != "${VIRTUAL_ENV}"] ; then
+    echo "You're not in the virtualenv root dir."
+    echo "For security reasons, you must cd into there and call me again."
+    exit 1
+fi
 
 if [ -z "${appname}" ]; then
     echo "Tell me the name of your application, please."
@@ -56,21 +67,24 @@ echo "OK."
 
 
 echo -n "Creating project tree for ${appname}... "
-mkdir --parent ${appname}/src/web2py/${appname}
+# mkdir --parent ${appname}/src/web2py/${appname}
+mkdir --parent ${appname}/src
 mkdir --parent ${appname}/doc
-echo "${appname}" > ${appname}/README
-touch ${appname}/doc/DUMMY
+# echo "${appname}" > ${appname}/README
+echo "# ${appname} #" > ${appname}/README.markdown
+# touch ${appname}/doc/DUMMY
+echo "# Docs for application ${appname} #" > ${appname}/doc/index.markdown
 echo "OK"
 
 
 echo -n "Creating scaffolding app ${appname}... "
 
-cd ${appname}/src/web2py/${appname}
+cd ${appname}/src
 cp ${sourcedir}/${scaffoldingapp} ./
 tar -xzf ${scaffoldingapp}
 rm ${scaffoldingapp}
 cd - 1>/dev/null
-ln -s ${PWD}/${appname}/src/web2py/${appname} web2py/applications/${appname}
+ln -s ${PWD}/${appname}/src web2py/applications/${appname}
 echo "OK"
 
 tree --noreport -d ${appname}
@@ -79,14 +93,14 @@ echo -n "Initializing your git repo... "
 git init ${appname}/ 1>/dev/null
 cp ${sourcedir}/_gitignore ${appname}/.gitignore
 cd ${appname}/ 1>/dev/null
-git add . 1>/dev/null
-git commit -m 'Just created the project' 1>/dev/null
+git add . 1>/dev/null 2>&1
+git commit -m 'Just created the project' 1>/dev/null 2>&1
 cd - 1>/dev/null
 echo "OK"
 
 echo "Notes:"
-echo "1) Your project root dir is ${appname}/ and it's a git repo. I already issued your 1st commit for you"
+echo "1) Your project root dir is ${appname}/ and it's a git repo. I already issued the 1st commit for you"
 echo "2) Customize ${appname}/.gitignore to your needs"
 echo "3) Put your documentation in ${appname}/doc/"
-echo "4) Web2py will execute your application from ${appname}/src/web2py/${appname}/"
+echo "4) Web2py will execute your application from ${appname}/src/"
 echo -e "\nGo ahead! Start coding for ${appname} ;-)\n"
