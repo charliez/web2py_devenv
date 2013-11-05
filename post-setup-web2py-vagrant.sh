@@ -24,8 +24,10 @@ fi
 ## run ngingx with user vagrant.
 
 cd /etc/nginx
-sudo sed -i.original 's/^user www-data/user vagrant/' nginx.conf
-
+sudo cp nginx.conf nginx.conf.original
+sudo sed -i 's/^user www-data/user vagrant/' nginx.conf
+# to avoid illegal chars error in js files inside the VM...
+sudo sed -i 's/sendfile on;/sendfile off;/' nginx.conf
 
 ## run uwsgi with user vagrant.
 
