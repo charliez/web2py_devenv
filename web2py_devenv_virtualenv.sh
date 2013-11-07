@@ -30,7 +30,7 @@ if [ -z "${VIRTUAL_ENV}" ]; then
     exit 1
 fi
 
-if [ "${PWD}" != "${VIRTUAL_ENV}"] ; then
+if [ "${PWD}" != "${VIRTUAL_ENV}" ] ; then
     echo "You're not in the virtualenv root dir."
     echo "For security reasons, you must cd into there and call me again."
     exit 1
